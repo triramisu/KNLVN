@@ -1,36 +1,7 @@
 class GameWordle {
   constructor(boardEl, keyboardEl, msgEl) {
-    this.WORDS = [
-      "APPLE","BRAVE","CRANE","DREAM","ELATE",
-      "FRAME","GHOST","HOUSE","INPUT","JUDGE",
-      "KNIFE","LIGHT","MONEY","NURSE","OPERA",
-      "PRIDE","QUICK","ROAST","SWEET","TRAIN",
-      "UNITY","VIVID","WORLD","YOUNG","ZEBRA",
-      "GRAPE","PEARL","STONE","CHAIR","TABLE",
-      "CANDY","BEACH","CLOUD","FLAME","GREEN",
-      "WHITE","BLACK","MUSIC","DANCE","WATER",
-      "EARTH","PLANT","FIGHT","HAPPY","LAUGH",
-      "MAGIC","NIGHT","QUEEN","RIVER","SHINE",
-      "STORM","TIGER","ANGEL","CHESS","GIANT",
-      "HORSE","JOKER","LEMON","METAL","NOBLE",
-      "OCEAN","PEACE","ROBOT","SNAKE","YOUTH",
-      "ALBUM","ALIEN","ALIVE","BACON","BASIC",
-      "BEAST","BLINK","BLOCK","BREAD","BRICK",
-      "BROWN","BRUSH","CABLE","CAMEL","CATCH",
-      "CHASE","CHIEF","CLEAN","CLOCK","CRUMB",
-      "DIRTY","DONUT","EAGLE","EMPTY","EXTRA",
-      "FAULT","FIELD","FLASH","GLASS","GLOVE",
-      "GUESS","HEART","HOTEL","INDEX","JUICE",
-      "KNOCK","LEAFY","LOGIC","LUCKY","MARCH",
-      "MATCH","MOUSE","NOISE","ONION","PAINT",
-      "PANDA","PAPER","PIZZA","POUND","QUIET",
-      "RADIO","REACH","RIGHT","SALAD","SHEEP",
-      "SKILL","SLEEP","SMILE","SOUND","SPACE",
-      "SPOON","STAND","STORE","SUGAR","SWING",
-      "TASTE","THICK","TOWEL","TRACK","UNCLE",
-      "UNDER","VALUE","VOICE","WATCH","WHEEL",
-      "WHERE","WOMAN","WRONG","YIELD","ZESTY"
-    ];
+    this.WORDS = ALL_WORDS;
+    this.wordSet = new Set(this.WORDS);
 
     this.ROWS = 6;
     this.COLS = 5;
@@ -136,7 +107,7 @@ class GameWordle {
     if (this.curCol < this.COLS) return this.showMessage("Chưa đủ 5 chữ!", 2000);
     const guess = this.grid[this.curRow].join("");
     
-    if (!this.WORDS.includes(guess)) {
+    if (!this.wordSet.has(guess)) {
       this.showMessage("Từ không hợp lệ", 1500);
       for (let i = 0; i < this.COLS; i++) {
         this.grid[this.curRow][i] = "";
@@ -213,6 +184,5 @@ class GameWordle {
       this.msgEl.className = "";
     }, time);
   }
-
 }
 window.GameWordle = GameWordle;
